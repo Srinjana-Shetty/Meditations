@@ -1,14 +1,17 @@
 import GuidedAffirmationsGallery from "@/components/GuidedAffirmationsGallery";
 import AFFIRMATION_GALLERY from "@/constants/affirmation-gallery";
 import images from "@/constants/affirmation-images";
+import { Ionicons } from "@expo/vector-icons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Page = () => {
     const insets = useSafeAreaInsets();
+    const navigation = useNavigation();
 
     return (
         <View className="flex-1">
@@ -19,9 +22,18 @@ const Page = () => {
                 style={{ paddingTop: insets.top }}
             >
                 <ScrollView showsVerticalScrollIndicator={false}>
+                    <View className='mb-6 mt-10'>
+                    <TouchableOpacity
+                              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                              className="absolute top-1 right-1 z-10"
+                    >
+                        <Ionicons name="menu" size={30} color="white" />
+                    </TouchableOpacity>
                     <Text className="text-zinc-50 text-3xl font-bold">
-                        Change your beliefs with affirmations
+                        Change your beliefs {`\n`}with affirmations
                     </Text>
+                    
+                    </View>
                     <View>
                         {AFFIRMATION_GALLERY.map((g) => (
                             <GuidedAffirmationsGallery

@@ -86,7 +86,10 @@ const Page = () => {
     const handleAdjustDuration = () => {
         if (isMeditating) toggleMeditationSessionStatus();
 
-        router.push("/(modal)/adjust-meditation-duration");
+        router.push({
+            pathname: "/(modal)/adjust-meditation-duration",
+            params: { id },
+          });
     };
 
     // Format the timeLeft to ensure two digits are displayed
